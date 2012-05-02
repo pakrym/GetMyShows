@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:cal="http://www.caliburnproject.org">
+    <Style x:Key="HeaderStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="70"/>
+        <Setter Property="FontFamily" Value="Segoe UI Light" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="10,-2,0,26" />
+    </Style>
+    <Style x:Key="BackButtonView" TargetType="UserControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="UserControl" >
+                    <Grid>
+                        <Button  VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="25,50,25,25" Style="{DynamicResource MetroCircleButtonStyle}"
+                            		Height="55"
+                            		Width="55" Content="{DynamicResource appbar_arrow_left}" cal:Message.Attach="GoBack()">
+                        </Button>
+                        <ContentPresenter  Content="{TemplateBinding Content}" Margin="75,25,25,25">
+
+                        </ContentPresenter >
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

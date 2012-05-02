@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2960A022-F3AD-4916-A8D1-6A3EE04AD0D1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>UTorrentAPI</RootNamespace>
+    <AssemblyName>UTorrentAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <DocumentationFile>$(AssemblyName).xml</DocumentationFile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Directory.cs" />
+    <Compile Include="DirectoryCollection.cs" />
+    <Compile Include="File.cs" />
+    <Compile Include="Protocol\FileUploadSerializer.cs" />
+    <Compile Include="FileCollection.cs" />
+    <Compile Include="Protocol\FileUploadSerializerAttribute.cs" />
+    <Compile Include="Protocol\WeaklyTypedJsonDeserializer.cs" />
+    <Compile Include="Protocol\WeaklyTypedJsonDeserializerAttribute.cs" />
+    <Compile Include="TorrentRemovalOptions.cs" />
+    <Compile Include="Protocol\EmptyResponse.cs" />
+    <Compile Include="Protocol\IJsonLoadable.cs" />
+    <Compile Include="Protocol\IUTorrentProxy.cs" />
+    <Compile Include="Protocol\JsonContentTypeMapper.cs" />
+    <Compile Include="Protocol\JsonObject.cs">
+      <!-- Excluded because this is mostly external code -->
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Protocol\SecurityTokenExtractor.cs" />
+    <Compile Include="Protocol\SecurityTokenProvider.cs" />
+    <Compile Include="Protocol\SecurityTokenUrlAugmentor.cs" />
+    <Compile Include="TorrentCollection.cs" />
+    <Compile Include="Torrent.cs" />
+    <Compile Include="TorrentStatus.cs" />
+    <Compile Include="UTorrentClient.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="copying.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
