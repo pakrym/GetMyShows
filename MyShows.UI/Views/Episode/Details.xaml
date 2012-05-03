@@ -9,18 +9,16 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Style="{DynamicResource HeaderStyle}"  Text="{Binding Title}" />
-        <StackPanel Grid.Row="1">
-            <Button x:Name="Download">Download</Button>
-            <Button x:Name="SaveSubtitles">Save subtitles</Button>
-        </StackPanel>
-        <ListBox>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <ContentPresenter cal:View.Context="List" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+        <TextBlock Style="{DynamicResource HeaderStyle}"  Text="{Binding Title}"  />
+        <ListBox x:Name="Torrents" SelectionMode="Multiple" Grid.Row="1">
         </ListBox>
+        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Orientation="Horizontal">
+            <Button x:Name="Download" Style="{DynamicResource MetroCircleButtonStyle}" Content="{DynamicResource appbar_cloud_download}"/>
+            <Button x:Name="Play" Style="{DynamicResource MetroCircleButtonStyle}" Content="{DynamicResource appbar_play}"/>
+        </StackPanel>
+        
+
     </Grid>
 </UserControl>

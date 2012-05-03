@@ -18,10 +18,7 @@ namespace MyShows.UI
         private static string GetEpisodePart(Episode episode)
         {
             var path = string.Format("{0}\\{1}\\{2}", episode.Series.Title, episode.Season, episode.Number);
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
+         
             return path;
         }
     }

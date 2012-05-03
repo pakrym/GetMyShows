@@ -17,7 +17,7 @@ namespace MyShows.UI.Views.Torrent
     /// <summary>
     /// Interaction logic for List.xaml
     /// </summary>
-    public partial class List : Page
+    public partial class List : UserControl
     {
         public List()
         {

@@ -8,27 +8,21 @@
              xmlns:behaviours="clr-namespace:MahApps.Metro.Behaviours;assembly=MahApps.Metro"
              xmlns:cal="http://www.caliburnproject.org" xmlns:Views="clr-namespace:MyShows.UI.Views" mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300" Style="{DynamicResource BackButtonView}">
-        
-        <Controls:Panorama VerticalAlignment="Stretch"  HeaderOffset="0" >
-            <Controls:PanoramaItem  Header="{Binding Title}"  x:Name="panoramaItem1"  FontFamily="Segoe UI Light" >
-                <ListBox ItemsSource ="{Binding Episodes}"  Height="500" BorderBrush="{x:Null}"  ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="{x:Null}"   cal:Message.Attach="SelectEpisode($this)">
-                    <i:Interaction.Behaviors>   
-                        <behaviours:TiltBehavior KeepDragging="False"/>
-                    </i:Interaction.Behaviors>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <ContentControl cal:View.Model="{Binding}" cal:View.Context="List" ></ContentControl>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel  IsItemsHost="True" Orientation="Vertical">
 
-                            </WrapPanel>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                </ListBox>
-            </Controls:PanoramaItem>
-        </Controls:Panorama>
+    <Controls:Panorama VerticalAlignment="Stretch"  HeaderOffset="0" >
+        <Controls:PanoramaItem  Header="{Binding Title}"  x:Name="panoramaItem1"  FontFamily="Segoe UI Light" >
+            <ListBox ItemsSource ="{Binding Episodes}"  Height="500"  SelectionMode="Multiple"  >
+                <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="cal:Message.Attach" 
+                            Value="[Event MouseLeftButtonUp] = [Action GoTo($dataContext)]"/>
+                    </Style>
+                </ListBox.Resources>
+                <i:Interaction.Behaviors>
+                    <behaviours:TiltBehavior KeepDragging="False"/>
+                </i:Interaction.Behaviors>
+            </ListBox>
+        </Controls:PanoramaItem>
+    </Controls:Panorama>
 
 </UserControl>

@@ -6,6 +6,35 @@
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Margin" Value="10,-2,0,26" />
     </Style>
+    <Style TargetType="ListBox">
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentControl cal:View.Model="{Binding}" cal:View.Context="List" ></ContentControl>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <ItemsPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel  IsItemsHost="True" Orientation="Vertical" HorizontalAlignment="Stretch" >
+
+                        </WrapPanel>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="BackButtonView" TargetType="UserControl">
         <Setter Property="Template">
             <Setter.Value>
@@ -18,6 +47,7 @@
                         <ContentPresenter  Content="{TemplateBinding Content}" Margin="75,25,25,25">
 
                         </ContentPresenter >
+                        
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

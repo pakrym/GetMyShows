@@ -3,6 +3,7 @@
 *.DS_Store
 
 #Visual Studio files
+Backup*/
 *.[Oo]bj
 *.user
 *.aps
@@ -31,7 +32,7 @@ obj/
 [Rr]elease*/
 Ankh.NoLoad
 _UpgradeReport*
-UpgradeLog.*
+UpgradeLog*.*
 
 
 #Tooling

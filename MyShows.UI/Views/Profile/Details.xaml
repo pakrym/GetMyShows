@@ -21,13 +21,6 @@
                             <ContentControl cal:View.Model="{Binding}" cal:View.Context="List" ></ContentControl>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel  IsItemsHost="True" Orientation="Vertical">
-
-                            </WrapPanel>
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
                 </ListBox>
             </Controls:PanoramaItem>
         </Controls:Panorama>

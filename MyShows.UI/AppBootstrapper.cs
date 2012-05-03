@@ -41,6 +41,8 @@ namespace MyShows.UI
 
         protected override void StartRuntime()
         {
+            System.Diagnostics.PresentationTraceSources.DataBindingSource.Switch.Level = System.Diagnostics.SourceLevels.Critical;
+
             LogManager.GetLog = type => new SimpleLog(type);
             base.StartRuntime();
         }
