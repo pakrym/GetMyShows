@@ -5,7 +5,7 @@ using Db4objects.Db4o.Linq;
 
 namespace MyShows.Core.Models
 {
-    public class DataContext
+    public class DataContext  
     {
         private IEmbeddedObjectContainer container;
 

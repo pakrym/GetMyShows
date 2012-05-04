@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MyShows.Core
 {
-    public class DataContext
+    public class DataContext 
     {
         private DatabaseEntities _databaseEntities = new DatabaseEntities();
 
@@ -15,7 +15,7 @@ namespace MyShows.Core
             return _databaseEntities.Profiles.ToList();
         }
 
-        public void StoreProfile(Profile profile)
+        public void Save()
         {
             _databaseEntities.SaveChanges();
         }
@@ -35,6 +35,16 @@ namespace MyShows.Core
             return
                 _databaseEntities.Profiles.First().Series.Where(
                     s => s.Episodes.Count(e => !e.Watched) > 0).ToList();
+        }
+
+        public void RemoveSeries(Series series)
+        {
+            _databaseEntities.DeleteObject(series);
+        }
+
+        public Episode GetEpisodeById(long episodeId)
+        {
+            return _databaseEntities.Episodes.First(e => e.EpisodeId == episodeId);
         }
     }
 
