@@ -35,15 +35,15 @@ namespace MyShows.UI.ViewModels
 
         public void Download()
         {
-            Torrents.First().Download();
+            //Torrents.First().Download();
         }
 
         public void Play()
         {
-            var torrent = Torrents.Where(t=>t.IsDownloaded).FirstOrDefault();
-            if (torrent == null)
-                return;
-            Process.Start(torrent.File);
+          //  var torrent = Torrents.Where(t=>t.IsDownloaded).FirstOrDefault();
+            //if (torrent == null)
+            //    return;
+            //Process.Start(torrent.File);
         }
 
         public void SaveSubtitles()

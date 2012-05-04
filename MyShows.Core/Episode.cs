@@ -91,12 +91,16 @@ namespace MyShows.Core
             {
                 throw new FormatException("Episode name format exception");
             }
-
         }
 
         public string CodedName
         {
-            get { return string.Format("s{0}e{1}", Season.ToString().PadLeft(2, '0'), Number.ToString().PadLeft(2, '0')); }
+            get { return EncodeName(Season, Number); }
+        }
+
+        public static string EncodeName(int s, int e)
+        {
+            return string.Format("s{0}e{1}", s.ToString().PadLeft(2, '0'), e.ToString().PadLeft(2, '0'));
         }
     }
 }

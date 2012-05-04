@@ -7,19 +7,31 @@ namespace MyShows.Core
 {
     class TorrentState
     {
-        public TorrentState(string hash, string file)
+        private int _season;
+        private int _number;
+        public TorrentState(string hash,  int season, int number)
         {
-            File = file;
             Hash = hash;
+            _season = season;
+            _number = number;
         }
 
-        internal string File { get; private set; }
-        internal string Hash { get; private set; }
-        private UTorrentAPI.Torrent _torrent;
+        
+        
+        internal string Hash { get; set; }
 
-        internal void UpdateTorrent(Torrrent  torrent)
+        private UTorrentAPI.Torrent _torrent;
+        private UTorrentAPI.File _file { get; set; }
+
+        internal void UpdateTorrent(UTorrentAPI.Torrent torrent)
         {
             _torrent = torrent;
+        }
+
+        private UTorrentAPI.File FindFile(UTorrentAPI.Torrent torrent)
+        {
+            var cn = Episode.EncodeName(_season, _number);
+            return torrent.Files.Where(f => f.Path.IndexOf(cn, StringComparison.OrdinalIgnoreCase) >= 0).FirstOrDefault();
         }
     }
 }

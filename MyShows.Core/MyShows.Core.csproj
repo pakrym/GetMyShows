@@ -74,6 +74,8 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TorrentManager.cs" />
+    <Compile Include="TorrentState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database.mdf" />
@@ -120,6 +122,12 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Model.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\uTorrentApi\UTorrentAPI.csproj">
+      <Project>{2960a022-f3ad-4916-a8d1-6a3ee04ad0d1}</Project>
+      <Name>UTorrentAPI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
