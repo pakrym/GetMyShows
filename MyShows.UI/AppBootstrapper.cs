@@ -58,13 +58,14 @@ namespace MyShows.UI
             container = new CompositionContainer(catalog);
 
             var batch = new CompositionBatch();
-
+            
             batch.AddExportedValue<IWindowManager>(new WindowManager());
             batch.AddExportedValue<IEventAggregator>(new EventAggregator());
             batch.AddExportedValue(container);
             batch.AddExportedValue(catalog);
 
             container.Compose(batch);
+            
 
 //            ViewLocator.NameTransformer.AddRule
 //(

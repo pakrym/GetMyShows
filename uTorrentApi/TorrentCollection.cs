@@ -331,6 +331,10 @@ namespace UTorrentAPI
 
         private class InternalTorrentCollection : KeyedCollection<string, Torrent>
         {
+            public InternalTorrentCollection() : base(StringComparer.InvariantCultureIgnoreCase)
+            {
+            }
+
             /// <summary>
             /// Retrieves the key to use from a torrent object
             /// </summary>

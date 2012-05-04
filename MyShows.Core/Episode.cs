@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -22,11 +23,13 @@ namespace MyShows.Core
 
         public void RemoveTorrent(Torrent torrent)
         {
+            if (torrent.EntityState != EntityState.Detached)
             _databaseEntities.DeleteObject(torrent);
         }
 
         public void RemoveSubtitles(Subtitles subtitles)
         {
+            if (subtitles.EntityState != EntityState.Detached)
             _databaseEntities.DeleteObject(subtitles);
         }
 

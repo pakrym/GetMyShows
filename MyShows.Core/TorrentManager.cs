@@ -8,19 +8,27 @@ using UTorrentAPI;
 
 namespace MyShows.Core
 {
-    class TorrentManager
+    public class TorrentManager
     {
+        private readonly string _url;
+        private readonly string _user;
+        private readonly string _password;
+
         private List<WeakReference> _tracked;
 
-        private readonly UTorrentClient _client;
+        private UTorrentClient _client;
+        private object _clientLock = new object();
         private Timer _timer;
 
         public TorrentManager(string url, string user, string password)
         {
+            _url = url;
+            _user = user;
+            _password = password;
             _tracked = new List<WeakReference>();
             _timer = new Timer();
             _timer.Interval = 5000;
-            _timer.Elapsed += () => Update();
+            _timer.Elapsed += (s, e) => Update();
             _timer.Enabled = true;
         }
 
@@ -29,7 +37,6 @@ namespace MyShows.Core
         {
             var hash = ExtractHash(t.Magnet);
 
-            var torrent = FindTorrent(hash);
 
             var ts = new TorrentState(hash, t.Episode.Season, t.Episode.Number);
 
@@ -39,25 +46,35 @@ namespace MyShows.Core
 
         public void Update()
         {
-            try
+            lock (_clientLock)
             {
-                _client = new UTorrentClient(new Uri(url), user, password);
-            }
-            catch (Exception ex)
-            {
-                _client.Torrents.Update();
-            }
-            
-            foreach (var r in _tracked)
-            {
-                if (r.IsAlive)
+                try
                 {
-                    var torrentState = (TorrentState)r.Target;
-                    torrentState.UpdateTorrent(_client.Torrents[torrentState.Hash]);
+                    _client = new UTorrentClient(new Uri(_url), _user, _password);
                 }
-            }
+                catch (Exception ex)
+                {
+                    // set  all to unknown state
+                }
 
-            _tracked.RemoveRange(_tracked.Where(r=>r.IsAlive);
+                foreach (var r in _tracked)
+                {
+                    if (r.IsAlive)
+                    {
+                        var torrentState = (TorrentState)r.Target;
+                        if (_client.Torrents.Contains(torrentState.Hash))
+                            torrentState.UpdateTorrent(_client.Torrents[torrentState.Hash]);
+                        else
+                        {
+                            torrentState.UpdateTorrent(null);
+                        }
+                    }
+                }
+
+                _tracked.RemoveAll(wr => !wr.IsAlive);
+
+
+            }
         }
 
         private string ExtractHash(string magnet)
@@ -67,11 +84,14 @@ namespace MyShows.Core
             return m.Groups[1].Value;
         }
 
-        private UTorrentAPI.Torrent FindTorrent(string btih)
-        {
-            return
-                _client.Torrents.Where(t => StringComparer.OrdinalIgnoreCase.Compare(t.Hash, btih) == 0).FirstOrDefault();
-        }
 
+        public void AddUrl(string magnet, string savePath)
+        {
+            lock (_clientLock)
+            {
+                _client.Torrents.AddUrl(magnet, savePath);
+            }
+            Update();
+        }
     }
 }

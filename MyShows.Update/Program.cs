@@ -28,6 +28,7 @@ namespace MyShows.Update
 
         void Run(bool cleanRun)
         {
+            
             _dispatcher = Dispatcher.CurrentDispatcher;
             _context = new DataContext();
 
@@ -67,28 +68,28 @@ namespace MyShows.Update
 
             foreach (var torrent in episode.Torrents.ToArray())
             {
-                _context.RemoveTorrent(torrent);
+                context.RemoveTorrent(torrent);
             }
 
             foreach (var r in result)
             {
-                _dispatcher.Invoke((Action)(() => episode.Torrents.Add(r)));
+                episode.Torrents.Add(r);
                 _logger.Info("{0} [{2}] {1}", r.Title, r.Magnet.Substring(0, 10), r.Seed);
             }
             var subs = _podnapisi.Search(series, episode);
 
             foreach (var subtitles in episode.Subtitles.ToArray())
             {
-                _dispatcher.Invoke((Action)(() => _context.RemoveSubtitles(subtitles)));
+                context.RemoveSubtitles(subtitles);
             }
 
             foreach (var s in subs)
             {
-                _dispatcher.Invoke((Action)(() => episode.Subtitles.Add(s)));
+                 episode.Subtitles.Add(s);
                 _logger.Info("{0} {1}", s.Title, s.File.Length);
             }
 
-            _dispatcher.Invoke((Action)(() => episode.LastUpdate = DateTime.Now));
+            episode.LastUpdate = DateTime.Now;
             context.Save();
         }
     }

@@ -61,7 +61,10 @@ namespace MyShows.Update
 
                 return new Subtitles() { Title = name, File = outputStream.ToArray() };
             }
-            catch { }
+            catch (Exception ex)
+            {
+                _logger.WarnException("Error getting subtitle "+subUrl,ex);
+            }
 
             return null;
         }
